@@ -1,0 +1,13 @@
+prod:
+host: deploytest.jp
+user: excite_deploy
+identity_file: ~
+stage: production
+deploy_path: /var/www/production
+
+test:
+host: deploytest.jp
+user: excite_deploy
+identity_file: ~
+stage: test
+deploy_path: /var/www/stage
