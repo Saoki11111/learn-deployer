@@ -25,15 +25,29 @@ set('writable_dirs', []);
 // 環境を設定しない場合のデフォルトの STG
 set('default_stage', 'develop');
 
-// 現在の dir のいちを保存
+// 現在の dir の位置を保存
 set('current_dir', realpath(''));
 
 // rollback 出来る世代数
 // スペル間違えで反映されない
 set('keep_releases', 3);
 
-// Hosts
-inventory('hosts.yml');
+// // Hosts
+// inventory('hosts.yml');
+
+// # local に develop(開発ブランチ) をデプロイする
+// # 環境は develop branch は 4.x デプロイ先は実行フォルダ内の dev
+localhost('local-dev')
+  ->stage('develop')
+  ->set('branch', '4.x')
+  ->set('deploy_path', get('current_dir').'/dev');
+
+// # local に 本番(prod) をデプロイする
+// # 環境は develop branch は 4.x デプロイ先は実行フォルダ内の dev
+localhost('local-dev')
+  ->stage('develop')
+  ->set('branch', '4.x')
+  ->set('deploy_path', get('current_dir').'/pro');
 
 // Tasks
 
@@ -60,7 +74,6 @@ after('deploy:failed', 'deploy:unlock');
 
 // HelloWorld!! を実行
 // ./dep hello
-
 desc('HelloWorld!!');
 task('hello', function() {
   // ↓ を表示
